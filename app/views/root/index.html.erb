@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+ <div class="container">
+ 	<h1 class="mb-3">Bienvenue sur the Gossip Project, <%= @first_name %></h1>
+    <% @gossips.each do |g| %>
+  	<div class="card mb-3" style="max-width: 18rem;">
+	  <div class="card-body">
+        <h5 class="card-title"><a href="<%= gossip_path(g.id) %>"><%= g.title %></a></h5>
+  	  </div>
+  	  <div class="card-footer"><%= g.user.first_name %></div>
+  	</div>
+  <%end%>
+</div>
+</body>
+</html>
