@@ -6,9 +6,7 @@
 * Version : 1.0.0
 
 
-Bienvenue sur l'application The Gossip Project.
-
-L'application liste tous les vilains ragots que les moussaillons ont a partagés avec la communauté.
+Bienvenue sur The Gossip Project, l'application  qui liste tous les vilains ragots que les moussaillons partagent avec la communauté.
 
 
 Pour installer l'application, veuillez suivre ces etapes:
