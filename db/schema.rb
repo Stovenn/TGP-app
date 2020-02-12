@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_06_220818) do
+ActiveRecord::Schema.define(version: 2020_02_12_113954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,15 +22,6 @@ ActiveRecord::Schema.define(version: 2020_02_06_220818) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "gossip_tag_joins", force: :cascade do |t|
-    t.bigint "gossip_id"
-    t.bigint "tag_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["gossip_id"], name: "index_gossip_tag_joins_on_gossip_id"
-    t.index ["tag_id"], name: "index_gossip_tag_joins_on_tag_id"
-  end
-
   create_table "gossips", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -38,6 +29,15 @@ ActiveRecord::Schema.define(version: 2020_02_06_220818) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_gossips_on_user_id"
+  end
+
+  create_table "gossiptagjoins", id: false, force: :cascade do |t|
+    t.bigint "gossips_id"
+    t.bigint "tags_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gossips_id"], name: "index_gossiptagjoins_on_gossips_id"
+    t.index ["tags_id"], name: "index_gossiptagjoins_on_tags_id"
   end
 
   create_table "private_messages", force: :cascade do |t|
