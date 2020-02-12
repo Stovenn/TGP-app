@@ -1,6 +1,7 @@
 class GossipController < ApplicationController
   def show
-  	@gossip =  Gossip.find(params[:id])
+    @gossip =  Gossip.find(params[:id])
+    @id = @gossip.user.city.id
   end
 
   def new
@@ -33,7 +34,15 @@ class GossipController < ApplicationController
     end
   end
 
+  def destroy
+    @gossip = Gossip.find(params[:id]) 
 
+    if @gossip.destroy
+      redirect_to root_index_path
+    else
+      render 'gossip'
+    end
+  end
   private
 
   def gossip_params

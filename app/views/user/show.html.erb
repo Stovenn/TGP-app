@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-  <div class="container">
+<div class="container">
 
   <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
@@ -16,7 +10,7 @@
         <h5 class="card-title font-weight-bold"><%= @user.last_name %> <%= @user.first_name %></h5>
           <p class="card-text"><span class="text-primary">Age :</span> <%= @user.age %> ans</p>
       	  <p class="card-text"><span class="text-primary">Email :</span> <%= @user.email %></p>
-          <p class="card-text"><span class="text-primary">Ville :</span> <%= @user.city.name %></p>
+          <p class="card-text"><span class="text-primary">Ville :</span> <a href="<%= city_path(@id) %>"> <%= @user.city.name %></a></p>
           <p class="card-text"><span class="text-primary">Description :</span> <%= @user.description %></p>
           <p class="card-text"><small class="text-muted">Last updated <%= @user.updated_at.strftime('%d-%m-%Y') %></small></p>
       </div>
@@ -24,8 +18,4 @@
   </div>
     <button class="btn btn-secondary"><a class="text-white" href="<%= gossip_path %>">Revenir au Gossip</a></button>
 </div>
-
 </div>
-
-</body>
-</html>
