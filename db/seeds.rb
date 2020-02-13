@@ -12,11 +12,11 @@
 end
 
 20.times do
-  User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::ChuckNorris.fact, email: Faker::Internet.email, age: rand(13..99), city_id: City.all.sample.id)
+  User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::GreekPhilosophers.quote, email: Faker::Internet.email, age: rand(13..99), city_id: City.all.sample.id)
 end
 
 # 3. creation de 40 gossip puis les liaison aux utilisateurs
 
 40.times do
-  Gossip.create(title: Faker::Book.title, content: Faker::GreekPhilosophers.quote, user_id: User.all.sample.id)
+  Gossip.create(title: Faker::Book.title, content: Faker::ChuckNorris.fact, user_id: User.all.sample.id)
 end

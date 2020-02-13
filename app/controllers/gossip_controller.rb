@@ -1,18 +1,23 @@
 class GossipController < ApplicationController
   def show
     @gossip =  Gossip.find(params[:id])
-    @id = @gossip.user.city.id
+    @c_id = @gossip.user.city.id
+    @u_id = @gossip.user.id
+    @comments = Gossip.find(params[:id]).comments
+    @comment = @gossip.comments.new
   end
 
+  before_action :authenticate_user, only: [:index]
   def new
     @gossip = Gossip.new
   end
 
   def create
-    @gossip = Gossip.new(gossip_params, user: User.all.sample) # avec xxx qui sont les données obtenues à partir du formulaire
-
+    @gossip = Gossip.create(title: params[:title], content: params[:content])
+    @gossip.user = User.find_by(id: session[:user_id])
     if @gossip.save # essaie de sauvegarder en base @gossip
-      redirect_to index_path
+      flash[:success] = "Potin bien créé !"
+      redirect_to root_index_path
     else
     # sinon, il render la view new (qui est celle sur laquelle on est déjà)
       render 'new'
@@ -26,11 +31,11 @@ class GossipController < ApplicationController
   def update
     @gossip = Gossip.find(params[:id]) 
 
-    if @gossip.update(gossip_params) # essaie de sauvegarder en base @gossip
+    if @gossip.update(title: params[:title], content: params[:content]) # essaie de sauvegarder en base @gossip
       redirect_to gossip_path
     else
-    # sinon, il render la view new (qui est celle sur laquelle on est déjà)
-      render 'new'
+      flash[:danger] = "Une erreur est survenue."
+      render 'edit'
     end
   end
 
@@ -43,9 +48,13 @@ class GossipController < ApplicationController
       render 'gossip'
     end
   end
+
   private
 
-  def gossip_params
-    params.require(:gossip).permit(:title, :content)
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Please log in."
+      redirect_to new_session_path
+    end
   end
 end
